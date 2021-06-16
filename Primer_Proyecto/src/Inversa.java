@@ -9,12 +9,20 @@
  * @author alehe
  */
 public class Inversa extends javax.swing.JInternalFrame {
-
+    Double [][] matriz; //3 de alto 6 de ancho
+    Double [] b;
+    Double [][] inversa;
+    FuncionesInv fun;
     /**
      * Creates new form Inversa
      */
     public Inversa() {
         initComponents();
+        matriz= new Double[3][6]; //3 de alto 6 de ancho
+        b = new Double[3];
+        inversa= new Double[3][3];
+        fun= new FuncionesInv();
+        this.llenarTablas();
     }
 
     /**
@@ -26,24 +34,252 @@ public class Inversa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TOriginal = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TInversa = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TX = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Matriz Inversa");
+
+        TOriginal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "X1", "X2", "X3", "b"
+            }
+        ));
+        jScrollPane1.setViewportView(TOriginal);
+        if (TOriginal.getColumnModel().getColumnCount() > 0) {
+            TOriginal.getColumnModel().getColumn(3).setHeaderValue("b");
+        }
+
+        TInversa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "I-1", "I-2", "I-3"
+            }
+        ));
+        jScrollPane2.setViewportView(TInversa);
+
+        jLabel1.setText("                                   INVERSA");
+
+        jLabel2.setText("                                   ORIGINAL");
+
+        TX.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "X"
+            }
+        ));
+        jScrollPane3.setViewportView(TX);
+
+        jButton1.setText("Ejecutar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Vaciar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
         );
 
-        setBounds(0, 0, 575, 365);
+        setBounds(0, 0, 435, 365);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.operar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.llenarTablas();
+    }//GEN-LAST:event_jButton2ActionPerformed
+    public void operar()
+    {
+        if(this.Verificar())
+        {
+            this.LlenarMatriz();
+            matriz=fun.recorrido1(matriz);
+            matriz=fun.recorrido2(matriz);
+            //esto no sé si sea necesario pero igual lo dejé por si acaso
+            if(matriz[0][0]!=1)
+            {
+                matriz=fun.dejarEnUno(matriz, 0, 0);
+            }
+            //aquí lleno la inversa
+            for(int i=0;i<3;i++)
+            {
+                for(int j=0;j<3;j++)
+                {
+                    inversa[i][j]=matriz[i][j+3];
+                }
+            }
+            b=fun.multiplicarB(inversa, b);
+            this.Colocar();
+        }
+        else
+        {
+            //aquí tengo que mostrar que nos e metió
+        }
+        
+    }
+    public void LlenarMatriz()
+    {
+        //double valor= Double.parseDouble(jTable1.getValueAt(i, 5).toString());
+        
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                matriz[i][j]= Double.parseDouble(TOriginal.getValueAt(i, j).toString());
+            }
+        }
+        matriz[0][3]=1.0;
+        matriz[0][4]=0.0;
+        matriz[0][5]=0.0;
+        
+        matriz[1][3]=0.0;
+        matriz[1][4]=1.0;
+        matriz[1][5]=0.0;
+        
+        matriz[2][3]=0.0;
+        matriz[2][4]=0.0;
+        matriz[2][5]=1.0;
+        
+        for(int i=0; i<3;i++)
+        {
+            b[i]= Double.parseDouble(TOriginal.getValueAt(i, 3).toString());
+        }
+    }
+    public void Colocar()
+    {
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                TInversa.setValueAt(inversa[i][j].toString(), i, j);
+            }
+        }
+        
+        for(int i=0;i<3;i++)
+        { 
+            TX.setValueAt(b[i].toString(), i, 0);
+        }
+    }
+    public boolean Verificar()
+    {
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                if("".equals(TOriginal.getValueAt(i, j).toString()))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public void llenarTablas()
+    {
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                TOriginal.setValueAt("", i, j);
+            }
+        }
+        
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                TInversa.setValueAt("", i, j);
+            }
+        }
+        
+        for(int i=0;i<3;i++)
+        { 
+            TX.setValueAt("", i, 0);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TInversa;
+    private javax.swing.JTable TOriginal;
+    private javax.swing.JTable TX;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

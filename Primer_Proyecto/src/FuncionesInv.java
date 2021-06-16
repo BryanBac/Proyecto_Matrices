@@ -10,8 +10,8 @@
  * @author HP15DA0023LA
  */
 public class FuncionesInv {
-    public float[][] reColocar(float[][] matA, int fila1, int fila2){
-        float [] arreglo= new float[6];
+    public Double[][] reColocar(Double[][] matA, int fila1, int fila2){
+        Double [] arreglo= new Double[6];
         for(int i=0; i<6;i++)
         {
             arreglo[i]=matA[fila1][i];
@@ -20,7 +20,7 @@ public class FuncionesInv {
         }
         return matA;
     }
-    public void mostrar(float[][] matA,int t)
+    public void mostrar(Double[][] matA,int t)
     {
         for(int i=0;i<3;i++)
         {
@@ -31,14 +31,14 @@ public class FuncionesInv {
             System.out.println();
         }
     }
-    public void mostrarB(float[] matA)
+    public void mostrarB(Double[] matA)
     {
         for(int i=0;i<3;i++)
         {
                 System.out.println(matA[i]);
         }
     }
-    public int[] verificarAbajo(float[][] matA, int pivY, int pivX) //el Y es el primer corchete de la matriz, el x es el segundo
+    public int[] verificarAbajo(Double[][] matA, int pivY, int pivX) //el Y es el primer corchete de la matriz, el x es el segundo
     {
         int sigAbajo=pivY+1;
         int siHubo=-1;
@@ -66,14 +66,14 @@ public class FuncionesInv {
         }
         return arrAux;
     }
-    public float[][] CeroColumna(float[][] matA, int pivY, int pivX) //deja en cero los valores debajo del pivote
+    public Double[][] CeroColumna(Double[][] matA, int pivY, int pivX) //deja en cero los valores debajo del pivote
     {
-        float a=matA[pivY][pivX];
+        Double a=matA[pivY][pivX];
         int x=(pivY+1);
         for(int i=x;i<3;i++)
         {
-            float b=matA[i][pivX];
-            float factor=-b/a;
+            Double b=matA[i][pivX];
+            Double factor=-b/a;
             for(int j=0;j<6;j++)
             {
                 matA[i][j]=(matA[pivY][j]*factor) + matA[i][j];
@@ -82,23 +82,23 @@ public class FuncionesInv {
         return matA;
     }
     //aquí ya vienen de regreso
-    public float[][] dejarEnUno(float[][] matA, int pivY, int pivX) //deja en 1 el pivote
+    public Double[][] dejarEnUno(Double[][] matA, int pivY, int pivX) //deja en 1 el pivote
     {
-        float factor= 1/matA[pivY][pivX];
+        Double factor= 1/matA[pivY][pivX];
         for(int i=pivX;i<6;i++)
         {
             matA[pivY][i]=matA[pivY][i]*factor;
         }
         return matA;
     }
-    public float[][] CeroArriba(float[][] matA, int pivY, int pivX)
+    public Double[][] CeroArriba(Double[][] matA, int pivY, int pivX)
     {
-        float a=matA[pivY][pivX];
+        Double a=matA[pivY][pivX];
         int x=(pivY-1);
         for(int i=x;i>-1;i--)
         {
-            float b=matA[i][pivX];
-            float factor=-b/a;
+            Double b=matA[i][pivX];
+            Double factor=-b/a;
             for(int j=0;j<6;j++)
             {
                 matA[i][j]=(matA[pivY][j]*factor) + matA[i][j];
@@ -106,12 +106,12 @@ public class FuncionesInv {
         }
         return matA;
     }
-    public float[] multiplicarB(float[][] matI, float [] b) //le envió la inversa y el b, me devuelve x
+    public Double[] multiplicarB(Double[][] matI, Double [] b) //le envió la inversa y el b, me devuelve x
     {
-        float [] x = new float[3];
+        Double [] x = new Double[3];
         for(int i=0; i<3;i++)
         {
-            float suma=0;
+            Double suma=0.0;
             for(int j=0;j<3;j++)
             {
                 suma=(matI[i][j]*b[j])+suma;
@@ -120,7 +120,7 @@ public class FuncionesInv {
         }
         return x;
     }
-    public float[][] recorrido1(float[][] matX)
+    public Double[][] recorrido1(Double[][] matX)
     {
         int x=0,y=0;
         while(y!=2)
@@ -148,7 +148,7 @@ public class FuncionesInv {
         }
         return matX;
     }
-    public float[][] recorrido2(float[][] matX)
+    public Double[][] recorrido2(Double[][] matX)
     {
         int x=2;
         int y=2;

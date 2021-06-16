@@ -1,3 +1,9 @@
+
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +15,13 @@
  * @author alehe
  */
 public class Graficar extends javax.swing.JInternalFrame {
-
+static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de ancho son 'x' 'y' 
     /**
      * Creates new form Graficar
      */
     public Graficar() {
         initComponents();
+        this.agregarPrueba();
     }
 
     /**
@@ -26,24 +33,101 @@ public class Graficar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Graficación 2D");
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Multiplicar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(414, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       JFrame.setDefaultLookAndFeelDecorated(true);
+       JFrame ventana= new JFrame("Dibujando");
+       ventana.setBackground(Color.yellow);
+       ventana.setSize(200, 200);
+       DibujarPuntos panel= new DibujarPuntos();
+       ventana.add(panel);
+       ventana.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<2;j++)
+            {
+                puntos[i][j]=puntos[i][j]+40;
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    public void agregarPrueba()
+    {
+        puntos[0][0]=10;
+        puntos[1][0]=10;
+        puntos[2][0]=40;
+        puntos[3][0]=40;
+        
+        puntos[0][1]=10;
+        puntos[1][1]=40;
+        puntos[2][1]=40;
+        puntos[3][1]=10;
+        
+    }
+
+    public static class DibujarPuntos extends JPanel
+    {
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g); 
+            g.setColor(Color.BLACK);
+            g.drawLine((int) puntos[0][0], (int) puntos[0][1], (int) puntos[1][0], (int) puntos[1][1]);
+            g.drawLine((int) puntos[1][0], (int) puntos[1][1], (int) puntos[2][0], (int) puntos[2][1]);
+            g.drawLine((int) puntos[2][0], (int) puntos[2][1], (int) puntos[3][0], (int) puntos[3][1]);
+            g.drawLine((int) puntos[3][0], (int) puntos[3][1], (int) puntos[0][0], (int) puntos[0][1]);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
