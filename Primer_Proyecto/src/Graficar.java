@@ -2,7 +2,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +18,9 @@ import javax.swing.JPanel;
  */
 public class Graficar extends javax.swing.JInternalFrame {
 static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de ancho son 'x' 'y' 
+
+DefaultTableModel modelo = new DefaultTableModel();
+int f, c;
     /**
      * Creates new form Graficar
      */
@@ -35,6 +40,9 @@ static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de anch
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Graficación 2D");
@@ -53,25 +61,51 @@ static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de anch
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "A", "B"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Ingresar valores a la matriz 2x2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(414, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(34, 34, 34))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,12 +122,43 @@ static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de anch
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        for(int i=0;i<4;i++)
+        /*for(int i=0;i<4;i++)
         {
             for(int j=0;j<2;j++)
             {
                 puntos[i][j]=puntos[i][j]+40;
             }
+        }*/
+        
+        try {
+            int n=2;
+
+            double m[][] = new double[n][n];// almacena los coeficientes de la matriz aumentada
+            double r[] = new double[n];// almacena al valor de la solucion de cada ecuacion ejemplo si 2x+4x2=3 entonces debera ingresar el los cuadors  2   4   3   en donde , m[0][1]=2,m[0][2]=4  y   r[0]=3
+
+            for (int i = 0; i < n; i++) {// pasamos a alamcenar en un arreglo los datos ingresados en el JTable
+                for (int j = 0; j < n; j++) {//
+                    m[i][j] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, j)));
+                }
+                r[i] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, n)));
+            }
+
+            double solucion[] = new double[n];// almacena la soluciones del sistema
+            
+            for (int x=0; x < m.length; x++) {
+                System.out.print("|");
+                for (int y=0; y < m[x].length; y++) {
+                    System.out.print (m[x][y]);
+                if (y!=m[x].length-1) System.out.print("\t");
+                }
+                System.out.println("|");
+            }
+
+        }//fin try
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error ingreso de datos \n"
+                + "NOTA: verifique que no haya casillas seleccionadas ni vacias\n"
+                + " también verifique que el ingreso de tados sea correctos");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     
@@ -129,5 +194,8 @@ static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de anch
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
