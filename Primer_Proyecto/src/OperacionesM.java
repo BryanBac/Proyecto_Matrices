@@ -34,7 +34,6 @@ public class OperacionesM {
                for(int k=0;k<c;k++){
                    g[i][j] += m[i][k] * n[k][j];
                }
-               
            }
        }
        return g;
