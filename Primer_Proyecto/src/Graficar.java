@@ -17,10 +17,17 @@ import javax.swing.table.DefaultTableModel;
  * @author alehe
  */
 public class Graficar extends javax.swing.JInternalFrame {
-static float [][] puntos= new float[4][2]; //6 de alto y 2 de ancho, las de ancho son 'x' 'y' 
-
-DefaultTableModel modelo = new DefaultTableModel();
-int f, c;
+    
+    //Matriz Cuadrado Inicial
+    static double MInicial[][] = new double[4][2]; //6 de alto y 2 de ancho, las de ancho son 'x' 'y' 
+    //Matriz Ingresada     
+    static double MMedia[][] = new double[2][2];// almacena los coeficientes de la matriz aumentada
+    //Matriz Final (Ya multiplicada)
+    double MFinal[][] = new double[4][2];
+    
+    //Inicio la clase OperacionesM
+    OperacionesM Matriz = new OperacionesM();
+    
     /**
      * Creates new form Graficar
      */
@@ -122,39 +129,38 @@ int f, c;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /*for(int i=0;i<4;i++)
-        {
-            for(int j=0;j<2;j++)
-            {
-                puntos[i][j]=puntos[i][j]+40;
-            }
-        }*/
-        
-        try {
-            int n=2;
 
-            double m[][] = new double[n][n];// almacena los coeficientes de la matriz aumentada
-            double r[] = new double[n];// almacena al valor de la solucion de cada ecuacion ejemplo si 2x+4x2=3 entonces debera ingresar el los cuadors  2   4   3   en donde , m[0][1]=2,m[0][2]=4  y   r[0]=3
-
-            for (int i = 0; i < n; i++) {// pasamos a alamcenar en un arreglo los datos ingresados en el JTable
-                for (int j = 0; j < n; j++) {//
-                    m[i][j] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, j)));
+        try {          
+            // Almacenamos en un arreglo los datos ingresados en el JTable
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                    MMedia[i][j] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, j)));
                 }
-                r[i] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, n)));
-            }
-
-            double solucion[] = new double[n];// almacena la soluciones del sistema
+            }           
             
-            for (int x=0; x < m.length; x++) {
-                System.out.print("|");
-                for (int y=0; y < m[x].length; y++) {
-                    System.out.print (m[x][y]);
-                if (y!=m[x].length-1) System.out.print("\t");
-                }
-                System.out.println("|");
-            }
+            //Impresion Matriz 1
+            
+            System.out.print ("Matriz figura 1"+ "\n");
+            
+            Matriz.mostrar(MInicial, 4, 2);
+            
+            //Impresion Matriz 2
+            
+            System.out.print ("\n" + "Matriz figura 2"+ "\n");
+            
+            Matriz.mostrar(MMedia, 2, 2);
+            
+            //Funcion para multiplicar las matrices
+            
+            Matriz.multiplicacion(MInicial, MMedia, MFinal, 4, 2, 2);
+            
+            //Impresion Matriz Multiplicada
+            
+            System.out.print ("\n" + "Matriz Final"+ "\n");
+            Matriz.mostrar(MFinal, 4, 2);
 
         }//fin try
+        
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error ingreso de datos \n"
                 + "NOTA: verifique que no haya casillas seleccionadas ni vacias\n"
@@ -164,15 +170,15 @@ int f, c;
     
     public void agregarPrueba()
     {
-        puntos[0][0]=10;
-        puntos[1][0]=10;
-        puntos[2][0]=40;
-        puntos[3][0]=40;
+        MInicial[0][0]=10;
+        MInicial[1][0]=10;
+        MInicial[2][0]=40;
+        MInicial[3][0]=40;
         
-        puntos[0][1]=10;
-        puntos[1][1]=40;
-        puntos[2][1]=40;
-        puntos[3][1]=10;
+        MInicial[0][1]=10;
+        MInicial[1][1]=40;
+        MInicial[2][1]=40;
+        MInicial[3][1]=10;
         
     }
 
@@ -183,10 +189,10 @@ int f, c;
         protected void paintComponent(Graphics g) {
             super.paintComponent(g); 
             g.setColor(Color.BLACK);
-            g.drawLine((int) puntos[0][0], (int) puntos[0][1], (int) puntos[1][0], (int) puntos[1][1]);
-            g.drawLine((int) puntos[1][0], (int) puntos[1][1], (int) puntos[2][0], (int) puntos[2][1]);
-            g.drawLine((int) puntos[2][0], (int) puntos[2][1], (int) puntos[3][0], (int) puntos[3][1]);
-            g.drawLine((int) puntos[3][0], (int) puntos[3][1], (int) puntos[0][0], (int) puntos[0][1]);
+            g.drawLine((int) MInicial[0][0], (int) MInicial[0][1], (int) MInicial[1][0], (int) MInicial[1][1]);
+            g.drawLine((int) MInicial[1][0], (int) MInicial[1][1], (int) MInicial[2][0], (int) MInicial[2][1]);
+            g.drawLine((int) MInicial[2][0], (int) MInicial[2][1], (int) MInicial[3][0], (int) MInicial[3][1]);
+            g.drawLine((int) MInicial[3][0], (int) MInicial[3][1], (int) MInicial[0][0], (int) MInicial[0][1]);
         }
         
     }

@@ -93,6 +93,7 @@ public class Gauss extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtoncargar_matriz2 = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Gauss Jordan");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
