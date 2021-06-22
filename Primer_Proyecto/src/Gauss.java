@@ -31,17 +31,18 @@ public class Gauss extends javax.swing.JInternalFrame {
 
     public double[] cargarMatriz(double m[][], double r[]) {
 
-        // recuerde que el metodo de Gauss Jordan trabaja con la idea de convertir la matriz aumentada en la matriz identidad
         for (int i = 0; i <= r.length - 1; i++) {
             double d, c = 0;
-            d = m[i][i];// seleccionamos el pivote
-            //area_de_texto.append("Holaaaa" + Double.toString(d / 2) + "*fila" + (i + 1) + "\n");// muesra en el area de texto el pivote seleccionado
-            for (int s = 0; s <= r.length - 1; s++) {// pasamos a convertir en 1 al pivote seleionado
+            d = m[i][i];
+            
+            //Convertimos en 1 al pivote seleionado
+            
+            for (int s = 0; s <= r.length - 1; s++) {
                 m[i][s] = ((m[i][s]) / d);
             }
             r[i] = ((r[i]) / d);
 
-            // paso a mostrar las opraciones realizadas en la matriz aumentada
+            //Mostramos las opraciones realizadas en la matriz aumentada
             for (int j = 0; j < r.length; j++) {
 
                 for (int k = 0; k < r.length; k++) {
@@ -49,19 +50,19 @@ public class Gauss extends javax.swing.JInternalFrame {
                 }
                 area_de_texto.append("|\t" + Double.toString(r[j]) + "\n");
             }
-            area_de_texto.append("\n\n");// fin paso a motrar las opraciones realizadas en la matriz aumentada
+            area_de_texto.append("\n\n");// fin 
 
             for (int x = 0; x <= r.length - 1; x++) {
                 if (i != x) {
                     c = m[x][i];
-                    //area_de_texto.append("-" + Double.toString(c) + " * fila" + (i + 1) + "+ fila" + (x + 1) + "\n");// mustra en pantalla las opraciones que se realizaran por fila
-                    for (int y = 0; y <= r.length - 1; y++) {// se hace cero a todos los elemntos de la colunma que no sean el pivote
+                    // se hace cero a todos los elemntos de la colunma que no sean el pivote
+                    for (int y = 0; y <= r.length - 1; y++) {
                         m[x][y] = m[x][y] - c * m[i][y];
 
                     }
                     r[x] = r[x] - c * r[i];
 
-                    // paso a mostrar las opraciones realizadas en la matriz aumentada
+                    //Mostramos las opraciones realizadas en la matriz aumentada
                     for (int j = 0; j < r.length; j++) {
 
                         for (int k = 0; k < r.length; k++) {
@@ -71,10 +72,10 @@ public class Gauss extends javax.swing.JInternalFrame {
                     }
                     area_de_texto.append("\n\n");// fin paso a motrar las opraciones realizadas en la matriz aumentada
 
-                }// fin if (i != x)
-            }// fin for (int x = 0; x <= r.length - 1; x++)
+                }
+            }
 
-        }//fin bucle i
+        }
         return r;// retorna la solucion l sistema
 
     }
@@ -84,14 +85,14 @@ public class Gauss extends javax.swing.JInternalFrame {
 
         jLabel7 = new javax.swing.JLabel();
         jTextFieldNumeroDeIncognitas = new javax.swing.JTextField();
-        jButtoncargar_matriz = new javax.swing.JButton();
+        BtDiseñar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtoncargar_matriz1 = new javax.swing.JButton();
+        BtResolver = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         area_de_texto = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jButtoncargar_matriz2 = new javax.swing.JButton();
+        BtBorrar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Gauss Jordan");
@@ -106,12 +107,12 @@ public class Gauss extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtoncargar_matriz.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtoncargar_matriz.setText("Diseñar Matriz");
-        jButtoncargar_matriz.setBorder(null);
-        jButtoncargar_matriz.addActionListener(new java.awt.event.ActionListener() {
+        BtDiseñar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        BtDiseñar.setText("Diseñar Matriz");
+        BtDiseñar.setBorder(null);
+        BtDiseñar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoncargar_matrizActionPerformed(evt);
+                BtDiseñarActionPerformed(evt);
             }
         });
 
@@ -127,15 +128,15 @@ public class Gauss extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButtoncargar_matriz1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtoncargar_matriz1.setText("Resolver Matriz");
-        jButtoncargar_matriz1.setActionCommand("Resolver matriz");
-        jButtoncargar_matriz1.setBorder(null);
-        jButtoncargar_matriz1.setMaximumSize(new java.awt.Dimension(97, 25));
-        jButtoncargar_matriz1.setMinimumSize(new java.awt.Dimension(97, 25));
-        jButtoncargar_matriz1.addActionListener(new java.awt.event.ActionListener() {
+        BtResolver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        BtResolver.setText("Resolver Matriz");
+        BtResolver.setActionCommand("Resolver matriz");
+        BtResolver.setBorder(null);
+        BtResolver.setMaximumSize(new java.awt.Dimension(97, 25));
+        BtResolver.setMinimumSize(new java.awt.Dimension(97, 25));
+        BtResolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoncargar_matriz1ActionPerformed(evt);
+                BtResolverActionPerformed(evt);
             }
         });
 
@@ -147,14 +148,14 @@ public class Gauss extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Solución");
 
-        jButtoncargar_matriz2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButtoncargar_matriz2.setText("Borrar");
-        jButtoncargar_matriz2.setBorder(null);
-        jButtoncargar_matriz2.setMaximumSize(new java.awt.Dimension(41, 25));
-        jButtoncargar_matriz2.setMinimumSize(new java.awt.Dimension(41, 25));
-        jButtoncargar_matriz2.addActionListener(new java.awt.event.ActionListener() {
+        BtBorrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        BtBorrar.setText("Borrar");
+        BtBorrar.setBorder(null);
+        BtBorrar.setMaximumSize(new java.awt.Dimension(41, 25));
+        BtBorrar.setMinimumSize(new java.awt.Dimension(41, 25));
+        BtBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoncargar_matriz2ActionPerformed(evt);
+                BtBorrarActionPerformed(evt);
             }
         });
 
@@ -167,9 +168,9 @@ public class Gauss extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(jButtoncargar_matriz1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtResolver, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtoncargar_matriz2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(109, 109, 109))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -178,7 +179,7 @@ public class Gauss extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextFieldNumeroDeIncognitas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtoncargar_matriz, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BtDiseñar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -202,14 +203,14 @@ public class Gauss extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jTextFieldNumeroDeIncognitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtoncargar_matriz, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtDiseñar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtoncargar_matriz2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(jButtoncargar_matriz1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(BtResolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -220,25 +221,16 @@ public class Gauss extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNumeroDeIncognitasActionPerformed
 
-    private void jButtoncargar_matrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncargar_matrizActionPerformed
-        /*
-        * pasamos a mostrar los cuadros para llenar la matriz aumentada en la pantalla
-        */
-
-        /*
-        * ejemplo si el sistema tiene 2 incognitas aparecera en la pantalla una matriz de 2x3
-        */
+    private void BtDiseñarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtDiseñarActionPerformed
+       
         try {
-            /*
-            * ejemplo si el sistema tiene 2 incognitas aparecera en la pantalla una matriz de 2x3
-            */
+            
             f = Integer.parseInt(jTextFieldNumeroDeIncognitas.getText());
             c = f + 1;
 
-            //
-            Object col[] = new Object[c];//  al erreglo mostrara en el titulo del JTabel las las incognitas y su solucion de la ecuaciom
-            // ejemplo si el sistema tiene 2 incognitas aparecera en la pantalla una matriz de 2x3
-            // se motrara en el titulo del JTable  x1  x2   d
+            //  Al erreglo mostrara en el titulo del JTabel las las incognitas y su solucion de la ecuaciom
+            Object col[] = new Object[c];
+            
             for (int j = 0; j < c; j++) {
                 if (j < c - 1) {
                     col[j] = "X" + (j + 1);
@@ -246,26 +238,30 @@ public class Gauss extends javax.swing.JInternalFrame {
                     col[j] = "d";
                 }
             }
-            modelo = new DefaultTableModel(col, f);// se muestra el titulo y el Jtablet toma la dimension de la matriz aumentada
-            jTable1.setModel(modelo);// el Jtablet toma la dimension de la matriz aumentada
+            modelo = new DefaultTableModel(col, f);
+            jTable1.setModel(modelo);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "INGRESO ERRONEO", "MENSAJE", JOptionPane.PLAIN_MESSAGE);
         }
-    }//GEN-LAST:event_jButtoncargar_matrizActionPerformed
+    }//GEN-LAST:event_BtDiseñarActionPerformed
 
-    private void jButtoncargar_matriz1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncargar_matriz1ActionPerformed
-        /*
-        * acontinuacion pasamos a gargar los datos ingresados en los cuadros del Jtablet en la matriz aumntada
-        */
+    private void BtResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtResolverActionPerformed
+        
+         //Pasamos a cargar los datos ingresados en los cuadros del Jtablet en la matriz aumntada
+        
         try {
 
-            int n = Integer.parseInt(jTextFieldNumeroDeIncognitas.getText());// alamacena el nuemro de ingonitas ingresado por teclado
+            // alamacena el nuemero de ingonitas ingresado por teclado
+            
+            int n = Integer.parseInt(jTextFieldNumeroDeIncognitas.getText());
 
             double m[][] = new double[n][n];// almacena los coeficientes de la matriz aumentada
-            double r[] = new double[n];// almacena al valor de la solucion de cada ecuacion ejemplo si 2x+4x2=3 entonces debera ingresar el los cuadors  2   4   3   en donde , m[0][1]=2,m[0][2]=4  y   r[0]=3
+            double r[] = new double[n];// almacena la respuesta final
 
-            for (int i = 0; i < n; i++) {// pasamos a alamcenar en un arreglo los datos ingresados en el JTable
+            // pasamos a alamcenar en un arreglo los datos ingresados en el JTable
+            
+            for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {//
                     m[i][j] = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, j)));
                 }
@@ -273,7 +269,7 @@ public class Gauss extends javax.swing.JInternalFrame {
             }
 
             double solucion[] = new double[n];// almacena la soluciones del sistema
-            r = this.cargarMatriz(m, r);// llamada al metodo a calcula la solucion del sistema de eciones
+            r = this.cargarMatriz(m, r);
 
             //pasamos a mostrar las soluciones del sistema en el area de texto
             for (int i = 0; i < n; i++) {
@@ -286,19 +282,19 @@ public class Gauss extends javax.swing.JInternalFrame {
                 + "NOTA: verifique que no haya casillas seleccionadas ni vacias\n"
                 + " también verifique que el ingreso de tados sea correctos");
         }
-    }//GEN-LAST:event_jButtoncargar_matriz1ActionPerformed
+    }//GEN-LAST:event_BtResolverActionPerformed
 
-    private void jButtoncargar_matriz2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncargar_matriz2ActionPerformed
-        // TODO add your handling code here:
+    private void BtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBorrarActionPerformed
+
         area_de_texto.setText("");
-    }//GEN-LAST:event_jButtoncargar_matriz2ActionPerformed
+    }//GEN-LAST:event_BtBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtBorrar;
+    private javax.swing.JButton BtDiseñar;
+    private javax.swing.JButton BtResolver;
     private javax.swing.JTextArea area_de_texto;
-    private javax.swing.JButton jButtoncargar_matriz;
-    private javax.swing.JButton jButtoncargar_matriz1;
-    private javax.swing.JButton jButtoncargar_matriz2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
